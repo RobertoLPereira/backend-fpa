@@ -1,7 +1,7 @@
 import os
 import sqlite3
 from datetime import datetime
- 
+
 class BackupService:
     def __init__(self, db_path: str = "fpa.db", backup_dir: str = "backups"):
         self.db_path = db_path
