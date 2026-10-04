@@ -4,31 +4,32 @@ from src.infrastructure.database.relatorio_repository import RelatorioRepository
 router = APIRouter(tags=["Relatórios e Planilhas"])
 repo = RelatorioRepository()
 
-@router.get("/projetos/resumo-executivo")
-def get_resumo_executivo():
+@router.get("/projetos/{projeto_id}/resumo-executivo")
+def get_resumo_executivo(projeto_id: int):
     try:
-        return {"status": "sucesso", "dados": repo.obter_resumo_executivo()}
+    # Passamos o projeto_id para filtrar o banco
+      return {"status": "sucesso", "dados": repo.obter_resumo_executivo(projeto_id)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/projetos/planejamento")
-def get_planejamento_detalhado():
+@router.get("/projetos/{projeto_id}/planejamento")
+def get_planejamento_detalhado(projeto_id: int):
     try:
-        return {"status": "sucesso", "dados": repo.obter_planejamento_master()}
+        return {"status": "sucesso", "dados": repo.obter_planejamento_master(projeto_id)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/projetos/precificacao")
-def get_precificacao():
+@router.get("/projetos/{projeto_id}/precificacao")
+def get_precificacao(projeto_id: int):
     try:
-        return {"status": "sucesso", "dados": repo.obter_precificacao()}
+        return {"status": "sucesso", "dados": repo.obter_precificacao(projeto_id)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-@router.get("/projetos/matriz-calculo")
-def get_matriz_calculo():
+@router.get("/projetos/{projeto_id}/matriz-calculo")
+def get_matriz_calculo(projeto_id: int):
     try:
         # Chama a função que lê a view_relatorio_matriz_fpa
-        return {"status": "sucesso", "dados": repo.obter_matriz_calculo()}
+        return {"status": "sucesso", "dados": repo.obter_matriz_calculo(projeto_id)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
