@@ -13,6 +13,11 @@ def obter_fatores_do_projeto(projeto_id: int):
         raise HTTPException(status_code=404, detail="Projeto não encontrado.")
     return repo_fator.buscar_por_projeto(projeto_id)
 
+@router.get("/projetos/{projeto_id}/fatores-detalhado", response_model=list)
+def obter_fatores_detalhados_relatorio(projeto_id: int):
+    """Retorna a lista de fatores e notas formatada para a tabela do relatório."""
+    return repo_fator.listar_notas_detalhadas(projeto_id)
+
 @router.put("/projetos/{projeto_id}/fatores")
 def atualizar_fatores_do_projeto(projeto_id: int, dados_atualizacao: AtualizarFatoresSchema):
     dados = {k: v for k, v in dados_atualizacao.model_dump().items() if v is not None}

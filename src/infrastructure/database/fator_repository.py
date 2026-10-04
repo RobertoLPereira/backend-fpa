@@ -29,4 +29,17 @@ class FatorRepository:
             raise e
         finally:
             conexao.close()
-            
+    def listar_notas_detalhadas(self, projeto_id: int) -> list:        
+        conexao = self.db.obter_conexao()
+        cursor = conexao.cursor()
+        query = """
+            SELECT c.nome, COALESCE(p.nota, 0) as nota
+            FROM características_influencia c
+            LEFT JOIN projeto_notas_influencia p ON p.caracteristica_id = c.id AND p.projeto_id = ?
+            ORDER BY c.id ASC
+        """
+        cursor.execute(query, (projeto_id,))
+        linhas = cursor.fetchall()
+        conexao.close()
+        return [dict(l) for l in linhas]
+        

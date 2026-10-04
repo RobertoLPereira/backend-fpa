@@ -23,4 +23,6 @@ class RelatorioRepository:
 
     def obter_precificacao(self) -> List[Dict]:
         return self._executar_consulta("SELECT * FROM view_precificacao_projeto")
-    
+    def obter_matriz_calculo(self) -> list:
+        # 💡 CORREÇÃO: Puxa diretamente da view_relatorio_matriz_fpa que você estruturou
+        return self._executar_consulta("SELECT * FROM view_relatorio_matriz_fpa")

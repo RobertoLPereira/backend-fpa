@@ -4,9 +4,9 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from fastapi import FastAPI
+from src.presentation.api.endpoints.relatorio_endpoint import router as relatorios_router
 from src.infrastructure.database.database_initializer import DatabaseInitializer
 from src.presentation.api.endpoints.projeto_endpoint import router as projetos_router
-from src.presentation.api.endpoints.relatorio_endpoint import router as relatorios_router
 from src.presentation.api.endpoints.funcao_endpoint import router as funcoes_router
 from src.presentation.api.endpoints.fator_endpoint import router as fatores_router
 from src.presentation.api.endpoints.backup_endpoint import router as backups_router
@@ -19,8 +19,8 @@ app = FastAPI(
 )
 
 # Registra todos os módulos de rotas sob o prefixo correto
-app.include_router(projetos_router, prefix="/api")
 app.include_router(relatorios_router, prefix="/api")
+app.include_router(projetos_router, prefix="/api")
 app.include_router(funcoes_router, prefix="/api")
 app.include_router(fatores_router, prefix="/api")
 app.include_router(backups_router, prefix="/api")

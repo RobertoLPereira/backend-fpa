@@ -24,4 +24,11 @@ def get_precificacao():
         return {"status": "sucesso", "dados": repo.obter_precificacao()}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+@router.get("/projetos/matriz-calculo")
+def get_matriz_calculo():
+    try:
+        # Chama a função que lê a view_relatorio_matriz_fpa
+        return {"status": "sucesso", "dados": repo.obter_matriz_calculo()}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
     
