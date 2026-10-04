@@ -10,6 +10,8 @@ from src.presentation.api.endpoints.projeto_endpoint import router as projetos_r
 from src.presentation.api.endpoints.funcao_endpoint import router as funcoes_router
 from src.presentation.api.endpoints.fator_endpoint import router as fatores_router
 from src.presentation.api.endpoints.backup_endpoint import router as backups_router
+from src.presentation.api.endpoints.tecnologia_endpoint import router as tecnologias_router # 💡 ADICIONE
+
 initializer = DatabaseInitializer()
 initializer.inicializar_banco()
 app = FastAPI(
@@ -24,6 +26,7 @@ app.include_router(projetos_router, prefix="/api")
 app.include_router(funcoes_router, prefix="/api")
 app.include_router(fatores_router, prefix="/api")
 app.include_router(backups_router, prefix="/api")
+app.include_router(tecnologias_router, prefix="/api")
 
 @app.get("/")
 def raiz():

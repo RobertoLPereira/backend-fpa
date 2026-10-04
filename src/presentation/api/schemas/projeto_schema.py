@@ -10,7 +10,7 @@ class BaseProjeto(BaseModel):
     tecnologia_id: int
     tipo_atividade: str = "Desenvolvimento"
     valor_ponto_funcao: float = 89.44
-
+    ajuste_adicional: float = Field(0.65, ge=0, le=1)
 class CriarProjetoSchema(BaseProjeto):
     pass
 
@@ -23,6 +23,7 @@ class AtualizarProjetoSchema(BaseModel):
     tecnologia_id: Optional[int] = None
     tipo_atividade: Optional[str] = None
     valor_ponto_funcao: Optional[float] = None
+    ajuste_adicional: Optional[float] = None
 
 class ProjetoSchema(BaseProjeto):
     id: int
