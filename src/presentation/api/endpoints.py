@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from src.infrastructure.database.repositories import RelatorioRepository
+from src.infrastructure.database.relatorio_repository import RelatorioRepository
 
 router = APIRouter()
 repo = RelatorioRepository(db_path="fpa.db") # Aponta para o seu arquivo de banco de dados
