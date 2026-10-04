@@ -8,3 +8,4 @@ class DBConnection:
         conexao = sqlite3.connect(self.db_path)
         conexao.row_factory = sqlite3.Row
         return conexao
+    

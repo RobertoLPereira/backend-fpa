@@ -29,3 +29,4 @@ class FatorRepository:
             raise e
         finally:
             conexao.close()
+            

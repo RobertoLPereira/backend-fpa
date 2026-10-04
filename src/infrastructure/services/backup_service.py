@@ -79,3 +79,4 @@ class BackupService:
         # Ordena os arquivos para que o backup mais recente apareça primeiro na lista
         arquivos.sort(reverse=True)
         return arquivos
+    

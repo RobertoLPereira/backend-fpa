@@ -23,3 +23,4 @@ class RelatorioRepository:
 
     def obter_precificacao(self) -> List[Dict]:
         return self._executar_consulta("SELECT * FROM view_precificacao_projeto")
+    

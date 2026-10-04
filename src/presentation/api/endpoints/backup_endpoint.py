@@ -55,3 +55,4 @@ def disparar_restauracao_manual(nome_arquivo_backup: str):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Falha crítica ao restaurar o banco de dados: {str(e)}"
         )
+    

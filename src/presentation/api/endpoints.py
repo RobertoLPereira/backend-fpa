@@ -30,3 +30,4 @@ def get_precificacao():
         return {"status": "sucesso", "dados": dados}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro ao ler banco: {str(e)}")
+    

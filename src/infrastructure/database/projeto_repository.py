@@ -73,3 +73,4 @@ class ProjetoRepository:
             raise e
         finally:
             conexao.close()
+            

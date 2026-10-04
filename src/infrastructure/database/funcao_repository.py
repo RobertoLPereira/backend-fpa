@@ -67,3 +67,4 @@ class FuncaoRepository:
             raise e
         finally:
             conexao.close()
+            

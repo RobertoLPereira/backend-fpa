@@ -24,3 +24,4 @@ def get_precificacao():
         return {"status": "sucesso", "dados": repo.obter_precificacao()}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
