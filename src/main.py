@@ -4,12 +4,14 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from fastapi import FastAPI
+from src.infrastructure.database.database_initializer import DatabaseInitializer
 from src.presentation.api.endpoints.projeto_endpoint import router as projetos_router
 from src.presentation.api.endpoints.relatorio_endpoint import router as relatorios_router
 from src.presentation.api.endpoints.funcao_endpoint import router as funcoes_router
 from src.presentation.api.endpoints.fator_endpoint import router as fatores_router
 from src.presentation.api.endpoints.backup_endpoint import router as backups_router
-
+initializer = DatabaseInitializer()
+initializer.inicializar_banco()
 app = FastAPI(
     title="API de Análise de Pontos de Função (FPA)",
     description="Backend completo, modular e robusto orquestrando as 11 abas da planilha FPA",

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 from src.infrastructure.services.backup_service import BackupService
+from src.infrastructure.database.database_initializer import DatabaseInitializer # 💡 NOVO
 from typing import List
  
 router = APIRouter(tags=["Administração e Segurança"])
@@ -55,4 +56,12 @@ def disparar_restauracao_manual(nome_arquivo_backup: str):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Falha crítica ao restaurar o banco de dados: {str(e)}"
         )
+@router.post("/sistema/inicializar-banco", status_code=status.HTTP_200_OK)
+def forçar_inicializacao_banco():
+    """Força a verificação e criação do esquema de tabelas e dados default se o banco sumir."""
+    initializer = DatabaseInitializer()
+    criado = initializer.inicializar_banco()
+    if criado:
+        return {"status": "sucesso", "mensagem": "Um novo banco de dados limpo foi gerado e configurado!"}
+    return {"status": "sucesso", "mensagem": "O banco de dados já existe e está operacional. Nenhuma alteração foi necessária."}
     
