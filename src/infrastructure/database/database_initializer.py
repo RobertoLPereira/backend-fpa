@@ -179,6 +179,63 @@ class DatabaseInitializer:
             LEFT JOIN resumo_pontos r ON p.id = r.projeto_id
             LEFT JOIN calculo_ni n ON p.id = n.projeto_id;
             """)
+            cursor.execute("""
+            DROP VIEW IF EXISTS view_planejamento_master;
+
+            CREATE VIEW view_planejamento_master AS
+            WITH esforco_por_funcao AS (
+                -- 💡 Calcula as horas de cada função baseando-se no Peso vs Produtividade da tecnologia do projeto
+                SELECT 
+                    f.projeto_id,
+                    p.nome_projeto AS "Projeto",
+                    t_fpa.nome_extenso AS "Grupo Funcional",
+                    f.descricao AS "Componente",
+                    -- Puxa o peso estático de acordo com o tipo e complexidade real
+                    CASE 
+                        WHEN t_fpa.sigla = 'ALI' AND f.complexidade = 'Simples' THEN 7
+                        WHEN t_fpa.sigla = 'ALI' AND f.complexidade = 'Média' THEN 10
+                        WHEN t_fpa.sigla = 'ALI' AND f.complexidade = 'Complexa' THEN 15
+                        WHEN t_fpa.sigla = 'AIE' AND f.complexidade = 'Simples' THEN 5
+                        WHEN t_fpa.sigla = 'AIE' AND f.complexidade = 'Média' THEN 7
+                        WHEN t_fpa.sigla = 'AIE' AND f.complexidade = 'Complexa' THEN 10
+                        WHEN t_fpa.sigla = 'EE'  AND f.complexidade = 'Simples' THEN 3
+                        WHEN t_fpa.sigla = 'EE'  AND f.complexidade = 'Média' THEN 4
+                        WHEN t_fpa.sigla = 'EE'  AND f.complexidade = 'Complexa' THEN 6
+                        WHEN t_fpa.sigla = 'SE'  AND f.complexidade = 'Simples' THEN 4
+                        WHEN t_fpa.sigla = 'SE'  AND f.complexidade = 'Média' THEN 5
+                        WHEN t_fpa.sigla = 'SE'  AND f.complexidade = 'Complexa' THEN 7
+                        WHEN t_fpa.sigla = 'CE'  AND f.complexidade = 'Simples' THEN 3
+                        WHEN t_fpa.sigla = 'CE'  AND f.complexidade = 'Média' THEN 4
+                        WHEN t_fpa.sigla = 'CE'  AND f.complexidade = 'Complexa' THEN 6
+                        ELSE 0
+                    END AS peso_calculado,
+                    tec.produtividade
+                FROM funcoes_fpa f
+                JOIN projetos p ON f.projeto_id = p.id
+                JOIN tipos_funcao_fpa t_fpa ON f.tipo_funcao_id = t_fpa.id
+                JOIN tecnologias tec ON p.tecnologia_id = tec.id
+            ),
+            matriz_horas AS (
+                SELECT 
+                    projeto_id,
+                    "Projeto",
+                    "Grupo Funcional",
+                    "Componente",
+                    -- Total de Horas da Linha = Peso x Produtividade (Ex: 10 * 8.2 = 82 horas)
+                    ROUND(peso_calculado * produtividade, 1) AS total_horas
+                FROM esforco_por_funcao
+            )
+            SELECT 
+                projeto_id,
+                "Projeto",
+                "Grupo Funcional",
+                "Componente",
+                ROUND(total_horas * 0.20, 1) AS "Levantamento",
+                ROUND(total_horas * 0.20, 1) AS "Especificação",
+                ROUND(total_horas * 0.50, 1) AS "Desenvolvimento",
+                ROUND(total_horas * 0.10, 1) AS "Homologação",
+                total_horas AS "Subtotal Horas"
+            FROM matriz_horas;""")
 
             conexao.commit()
             print("🚀 Estrutura de tabelas, triggers, views e dados default estabelecida com sucesso!")

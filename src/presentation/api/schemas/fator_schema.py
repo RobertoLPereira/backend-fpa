@@ -1,6 +1,14 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import List, Optional
 
+class ItemNotaInfluenciaSchema(BaseModel):
+    caracteristica_id: int = Field(..., description="ID da característica no catálogo")
+    nome: Optional[str] = Field(None, description="Nome retornado apenas na leitura")
+    nota: int = Field(..., ge=0, le=5, description="Nota de influência variando estritamente de 0 a 5")
+
+class AtualizarNotasProjetoSchema(BaseModel):
+    notas: List[ItemNotaInfluenciaSchema] = Field(..., description="Lista de características e suas respectivas novas notas")
+    
 class FatoresInfluenciaSchema(BaseModel):
     projeto_id: int
     comunicacao_dados: int = Field(0, ge=0, le=5)
