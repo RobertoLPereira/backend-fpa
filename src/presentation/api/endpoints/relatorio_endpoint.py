@@ -3,7 +3,6 @@ from typing import List
 from fastapi import APIRouter, HTTPException
 from src.presentation.api.schemas.relatorio_analitico_schema import GrupoAnaliticoSchema
 from src.infrastructure.database.relatorio_repository import RelatorioRepository
-
 router = APIRouter(tags=["Relatórios e Planilhas"])
 repo = RelatorioRepository()
 
