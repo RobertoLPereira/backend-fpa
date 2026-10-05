@@ -1,4 +1,7 @@
+from typing import List
+
 from fastapi import APIRouter, HTTPException
+from src.presentation.api.schemas.relatorio_analitico_schema import GrupoAnaliticoSchema
 from src.infrastructure.database.relatorio_repository import RelatorioRepository
 
 router = APIRouter(tags=["Relatórios e Planilhas"])
@@ -32,4 +35,8 @@ def get_matriz_calculo(projeto_id: int):
         return {"status": "sucesso", "dados": repo.obter_matriz_calculo(projeto_id)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    
+
+@router.get("/projetos/{projeto_id}/relatorio-analitico", response_model=List[GrupoAnaliticoSchema])
+def obter_relatorio_analitico(projeto_id: int):
+    # Chama o repositório instanciado no seu ecossistema
+    return repo.obter_relatorio_analitico_agrupado(projeto_id)
