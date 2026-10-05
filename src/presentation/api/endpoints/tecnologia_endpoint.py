@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from src.infrastructure.database.tecnologia_repository import TecnologiaRepository
+
 from typing import List
 
 router = APIRouter(tags=["Tecnologias (Fatores de Produtividade)"])

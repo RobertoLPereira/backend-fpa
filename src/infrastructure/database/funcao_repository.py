@@ -9,9 +9,23 @@ class FuncaoRepository:
         conexao = self.db.obter_conexao()
         cursor = conexao.cursor()
         try:
+            # 💡 RESOLUÇÃO DINÂMICA: Substituímos o valor estático por uma Subquery 
+            # que busca a sigla diretamente da tabela 'tipos_funcao_fpa' usando o ID.
             query = """
-                INSERT INTO funcoes_fpa (projeto_id, descricao, tipo_funcao, arquivos_referenciados, itens_dados)
-                VALUES (:projeto_id, :descricao, :tipo_funcao, :arquivos_referenciados, :itens_dados)
+                INSERT INTO funcoes_fpa (
+                    projeto_id, 
+                    descricao, 
+                    tipo_funcao, 
+                    arquivos_referenciados, 
+                    itens_dados
+                )
+                VALUES (
+                    :projeto_id, 
+                    :descricao, 
+                    (SELECT sigla FROM tipos_funcao_fpa WHERE id = :tipo_funcao_id), 
+                    :arquivos_referenciados, 
+                    :itens_dados
+                )
             """
             cursor.execute(query, dados)
             conexao.commit()
@@ -21,6 +35,7 @@ class FuncaoRepository:
             raise e
         finally:
             conexao.close()
+
 
     def listar_por_projeto(self, projeto_id: int) -> List[Dict]:
         conexao = self.db.obter_conexao()
