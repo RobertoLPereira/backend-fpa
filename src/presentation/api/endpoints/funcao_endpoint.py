@@ -24,3 +24,12 @@ def deletar_funcao(funcao_id: int):
     if repo.deletar(funcao_id):
         return {"status": "sucesso", "mensagem": "Componente removido do escopo!"}
     raise HTTPException(status_code=404, detail="Componente não encontrado.")
+
+@router.put("/funcoes/{funcao_id}")
+def atualizar_funcao(funcao_id: int, funcao: CriarFuncaoSchema):
+    try:
+        if repo.atualizar(funcao_id, funcao.model_dump()):
+            return {"status": "sucesso", "mensagem": "Componente funcional atualizado!"}
+        raise HTTPException(status_code=404, detail="Componente não encontrado.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

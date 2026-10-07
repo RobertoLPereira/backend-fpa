@@ -15,6 +15,7 @@ from src.presentation.api.endpoints.tipo_funcao_endpoint import router as tipo_f
 
 initializer = DatabaseInitializer()
 initializer.inicializar_banco()
+
 app = FastAPI(
     title="API de Análise de Pontos de Função (FPA)",
     description="Backend completo, modular e robusto orquestrando as 11 abas da planilha FPA",
