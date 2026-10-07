@@ -1,4 +1,6 @@
-from fastapi import APIRouter, HTTPException
+import sqlite3
+
+from fastapi import APIRouter, HTTPException,status
 from src.presentation.api.schemas.tecnologia_schema import TecnologiaSchema
 from src.infrastructure.database.tecnologia_repository import TecnologiaRepository
 
@@ -19,6 +21,12 @@ def cadastrar_tecnologia(payload: TecnologiaSchema):
     try:
         novo_id = repo.criar(payload.model_dump())
         return {"status": "sucesso", "mensagem": "Tecnologia registrada!", "id": novo_id}
+    except sqlite3.IntegrityError:
+        # 💡 CAPTURA DE INTEGRIDADE: Identifica nome duplicado e barra de forma elegante
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, 
+            detail="Esta tecnologia/linguagem já está cadastrada no ecossistema."
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
