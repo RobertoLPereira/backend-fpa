@@ -24,7 +24,7 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 COPY ./src ./src
 
 # 8. Copia o arquivo do banco de dados para a raiz do container
-#COPY fpa.db .
+COPY fpa.db .
 
 # 9. Cria a pasta de backups dentro do container e concede permissões de escrita
 RUN mkdir -p backups
