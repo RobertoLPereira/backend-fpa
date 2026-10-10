@@ -4,7 +4,6 @@ __pycache__/
 *.pyc
 
 # Banco de dados local (Não enviar o arquivo de dados bruto para o git)
-*.db
 *.db-journal
 *.sqlite3
 
