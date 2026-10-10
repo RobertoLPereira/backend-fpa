@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
-from src.infrastructure.services.backup_service import BackupService
-from src.infrastructure.database.database_initializer import DatabaseInitializer # 💡 NOVO
+from infrastructure.services.backup_service import BackupService
+from infrastructure.database.database_initializer import DatabaseInitializer # 💡 NOVO
 from typing import List
  
 router = APIRouter(tags=["Administração e Segurança"])

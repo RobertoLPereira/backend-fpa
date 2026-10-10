@@ -1,8 +1,8 @@
 import sqlite3
 
 from fastapi import APIRouter, HTTPException,status
-from src.presentation.api.schemas.tecnologia_schema import TecnologiaSchema
-from src.infrastructure.database.tecnologia_repository import TecnologiaRepository
+from presentation.api.schemas.tecnologia_schema import TecnologiaSchema
+from infrastructure.database.tecnologia_repository import TecnologiaRepository
 
 from typing import List
 

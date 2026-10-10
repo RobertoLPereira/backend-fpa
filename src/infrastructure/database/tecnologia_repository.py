@@ -1,5 +1,5 @@
 from typing import List, Dict
-from src.infrastructure.database.connection import DBConnection
+from infrastructure.database.connection import DBConnection
 
 class TecnologiaRepository:
     def __init__(self):

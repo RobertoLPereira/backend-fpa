@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
-from src.infrastructure.database.fator_repository import FatorRepository
-from src.infrastructure.database.projeto_repository import ProjetoRepository
+from infrastructure.database.fator_repository import FatorRepository
+from infrastructure.database.projeto_repository import ProjetoRepository
 from typing import List, Optional
 
 router = APIRouter(tags=["Fatores de Influência (Notas 0 a 5)"])

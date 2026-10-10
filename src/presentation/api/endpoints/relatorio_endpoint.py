@@ -1,12 +1,12 @@
 from typing import List
 
 from fastapi import APIRouter, HTTPException
-from src.presentation.api.schemas.relatorio_analitico_schema import GrupoAnaliticoSchema
-from src.infrastructure.database.relatorio_repository import RelatorioRepository
+from presentation.api.schemas.relatorio_analitico_schema import GrupoAnaliticoSchema
+from infrastructure.database.relatorio_repository import RelatorioRepository
 router = APIRouter(tags=["Relatórios e Planilhas"])
 repo = RelatorioRepository()
 
-@router.get("/projetos/{projeto_id}/resumo-executivo")
+@router.get("/projetos/{projeto_id}/resumo-Executivo")
 def get_resumo_executivo(projeto_id: int):
     try:
     # Passamos o projeto_id para filtrar o banco

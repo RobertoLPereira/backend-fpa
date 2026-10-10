@@ -1,5 +1,5 @@
 from typing import Optional, Dict, List
-from src.infrastructure.database.connection import DBConnection
+from infrastructure.database.connection import DBConnection
 
 class FatorRepository:
     def __init__(self):

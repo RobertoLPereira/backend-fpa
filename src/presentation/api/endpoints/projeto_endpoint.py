@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from src.presentation.api.schemas.projeto_schema import CriarProjetoSchema, AtualizarProjetoSchema, ProjetoSchema
-from src.infrastructure.database.projeto_repository import ProjetoRepository
+from presentation.api.schemas.projeto_schema import CriarProjetoSchema, AtualizarProjetoSchema, ProjetoSchema
+from infrastructure.database.projeto_repository import ProjetoRepository
 from typing import List
 
 router = APIRouter(tags=["Projetos"])

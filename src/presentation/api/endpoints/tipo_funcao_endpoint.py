@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
 
-from src.presentation.api.schemas.tipo_funcao_schema import TipoFuncaoCriar, TipoFuncaoResposta,AtualizarTipoFuncaoSchema
+from presentation.api.schemas.tipo_funcao_schema import TipoFuncaoCriar, TipoFuncaoResposta,AtualizarTipoFuncaoSchema
 # Injetar os imports corretos das suas classes do sistema
-from src.infrastructure.database.tipo_funcao_repository import TipoFuncaoFpaRepository
+from infrastructure.database.tipo_funcao_repository import TipoFuncaoFpaRepository
 router = APIRouter(tags=["Tipos de Função FPA"])
 repo = TipoFuncaoFpaRepository()
 

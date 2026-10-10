@@ -33,4 +33,4 @@ RUN mkdir -p backups
 EXPOSE 8000
 
 # 11. Comando definitivo para iniciar o Uvicorn em produção (sem o parâmetro --reload)
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

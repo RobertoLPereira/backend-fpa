@@ -1,6 +1,6 @@
 import os
 import sqlite3
-from src.infrastructure.database.connection import DBConnection
+from infrastructure.database.connection import DBConnection
 
 class DatabaseInitializer:
     def __init__(self):

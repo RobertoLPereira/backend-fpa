@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
 # 💡 CORREÇÃO CIRÚRGICA: Removido o 'AtualizarFuncaoSchema' que gerava o erro de importação
-from src.presentation.api.schemas.funcao_schema import CriarFuncaoSchema, FuncaoSchema
-from src.infrastructure.database.funcao_repository import FuncaoRepository
+from presentation.api.schemas.funcao_schema import CriarFuncaoSchema, FuncaoSchema
+from infrastructure.database.funcao_repository import FuncaoRepository
 from typing import List
 
 router = APIRouter(tags=["Funções Componentes (FPA)"])

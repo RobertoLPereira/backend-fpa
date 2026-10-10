@@ -1,5 +1,5 @@
 from typing import List, Dict, Optional
-from src.infrastructure.database.connection import DBConnection
+from infrastructure.database.connection import DBConnection
 
 class ProjetoRepository:
     def __init__(self):
