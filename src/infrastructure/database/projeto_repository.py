@@ -10,8 +10,8 @@ class ProjetoRepository:
         cursor = conexao.cursor()
         try:
             query_projeto = """
-                INSERT INTO projetos (nome_projeto, gerente_projeto, responsavel, data_elaboracao, numero_projeto, tecnologia_id, tipo_atividade, valor_ponto_funcao)
-                VALUES (:nome_projeto, :gerente_projeto, :responsavel, :data_elaboracao, :numero_projeto, :tecnologia_id, :tipo_atividade, :valor_ponto_funcao)
+                INSERT INTO projetos (nome_projeto, gerente_projeto, responsavel, data_elaboracao, numero_projeto, tecnologia_id, tipo_atividade, valor_ponto_funcao,ajuste_adicional)
+                VALUES (:nome_projeto, :gerente_projeto, :responsavel, :data_elaboracao, :numero_projeto, :tecnologia_id, :tipo_atividade, :valor_ponto_funcao, :ajuste_adicional)
             """
             cursor.execute(query_projeto, dados)
             projeto_id = cursor.lastrowid
@@ -30,7 +30,7 @@ class ProjetoRepository:
     def listar_todos(self) -> List[Dict]:
         conexao = self.db.obter_conexao()
         cursor = conexao.cursor()
-        cursor.execute("SELECT * FROM projetos")
+        cursor.execute("SELECT p.*, t.nome as nomeTecnologia,t.produtividade_desenvolvimento,t.produtividade_manutencao FROM projetos p left join tecnologias t on p.tecnologia_id=t.id")
         linhas = cursor.fetchall()
         conexao.close()
         return [dict(l) for l in linhas]
@@ -38,7 +38,7 @@ class ProjetoRepository:
     def buscar_por_id(self, projeto_id: int) -> Optional[Dict]:
         conexao = self.db.obter_conexao()
         cursor = conexao.cursor()
-        cursor.execute("SELECT * FROM projetos WHERE id = ?", (projeto_id,))
+        cursor.execute("SELECT p.*, t.nome as nomeTecnologia,t.produtividade_desenvolvimento,t.produtividade_manutencao FROM projetos p left join tecnologias t on p.tecnologia_id=t.id WHERE id = ?", (projeto_id,))
         linha = cursor.fetchone()
         conexao.close()
         return dict(linha) if linha else None
