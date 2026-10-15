@@ -26,10 +26,7 @@ class AtualizarProjetoSchema(BaseModel):
     tecnologia_id: Optional[int] = None
     tipo_atividade: Optional[str] = None
     valor_ponto_funcao: Optional[float] = None
-    ajuste_adicional: Optional[float] = None
-    nomeTecnologia:   Optional[str] = None
-    produtividade_desenvolvimento : int
-    produtividade_manutencao: int
+    ajuste_adicional: Optional[float] = None    
 
 class ProjetoSchema(BaseProjeto):
     id: int

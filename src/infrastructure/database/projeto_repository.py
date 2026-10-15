@@ -38,7 +38,7 @@ class ProjetoRepository:
     def buscar_por_id(self, projeto_id: int) -> Optional[Dict]:
         conexao = self.db.obter_conexao()
         cursor = conexao.cursor()
-        cursor.execute("SELECT p.*, t.nome as nomeTecnologia,t.produtividade_desenvolvimento,t.produtividade_manutencao FROM projetos p left join tecnologias t on p.tecnologia_id=t.id WHERE id = ?", (projeto_id,))
+        cursor.execute("SELECT * FROM projetos  WHERE id = ?", (projeto_id,))
         linha = cursor.fetchone()
         conexao.close()
         return dict(linha) if linha else None
