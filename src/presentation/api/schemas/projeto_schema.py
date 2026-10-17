@@ -12,8 +12,8 @@ class BaseProjeto(BaseModel):
     valor_ponto_funcao: float = 89.44
     ajuste_adicional: float = Field(0.65, ge=0, le=1)
     nomeTecnologia:   Optional[str] = None
-    produtividade_desenvolvimento : int
-    produtividade_manutencao: int
+    produtividade_desenvolvimento : Optional[int] = None
+    produtividade_manutencao: Optional[int] = None
 class CriarProjetoSchema(BaseProjeto):
     pass
 

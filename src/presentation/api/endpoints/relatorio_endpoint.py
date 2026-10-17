@@ -6,7 +6,7 @@ from infrastructure.database.relatorio_repository import RelatorioRepository
 router = APIRouter(tags=["Relatórios e Planilhas"])
 repo = RelatorioRepository()
 
-@router.get("/projetos/{projeto_id}/resumo-Executivo")
+@router.get("/projetos/{projeto_id}/resumo-executivo")
 def get_resumo_executivo(projeto_id: int):
     try:
     # Passamos o projeto_id para filtrar o banco
